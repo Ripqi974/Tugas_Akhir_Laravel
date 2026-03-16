@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.custom-navbar {
+    background-color: #d71920;
+}
+
+.hero-section {
+    height: 400px;
+    background: linear-gradient(rgba(215,25,32,0.85), rgba(215,25,32,0.85)),
+                url("../assets/showroom-toyota.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.section-title {
+    color: #d71920;
+    font-weight: bold;
+}
+
+.dashboard-card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-dashboard {
+    font-size: 40px;
+    color: #d71920;
+}
+
+.mobil-card {
+    border: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.mobil-card:hover {
+    transform: scale(1.05);
+}
+
+.footer-custom {
+    background-color: #d71920;
+    color: white;
+}
+
+body.dark-mode {
+    background-color: #121212 !important;
+    color: white !important;
+}
+
+body.dark-mode #formMobil {
+    background-color: #212529 !important; 
+    border-color: #444 !important;
+}
+
+body.dark-mode #formMobil .form-label {
+    color: white !important; 
+}
+
+body.dark-mode #formMobil .form-control {
+    background-color: #333 !important; 
+    color: white !important; 
+    border: 1px solid #555 !important;
+}
+
+body.dark-mode .dashboard-card, 
+body.dark-mode .mobil-card,
+body.dark-mode .modal-content {
+    background-color: #1e1e1e !important;
+    color: white !important;
+}
+
+body.dark-mode .dashboard-card h2, 
+body.dark-mode .dashboard-card h5 {
+    color: white !important;
+}
