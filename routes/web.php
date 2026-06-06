@@ -1,19 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
-// Halaman Utama
+// Redirect halaman utama ke dashboard / login
 Route::get('/', function () {
-    return view('index');
-})->name('home');
+    return redirect()->route('dashboard');
+});
 
-// Halaman Login
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+// Grup Route yang Wajib Login (Auth)
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+    // Semua User (Admin & User biasa) bisa akses halaman dashboard ini untuk melihat produk
+    Route::get('/dashboard', [ProductController::class, 'index'])->name('dashboard');
 
-// Proses Login
-Route::post('/login', [AuthController::class, 'login'])->name('login.proses');
+    // Pengelolaan Profile bawaan Breeze (Fitur Wajib No.7)
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-// Logout
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    // PROTEKSI ROLE ADMIN: Hanya admin yang bisa memicu mutasi data (C-U-D)
+    Route::middleware(['role:admin'])->group(function () {
+        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+        Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    });
+});
+
+require __DIR__.'/auth.php';

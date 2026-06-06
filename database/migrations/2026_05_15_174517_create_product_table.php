@@ -10,14 +10,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id('product_id');
-
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
-
             $table->string('nama_product');
             $table->integer('harga');
             $table->integer('stok');
-
+            $table->string('gambar')->nullable(); // Tambahkan kolom ini untuk upload gambar
             $table->timestamps();
 
             $table->foreign('category_id')
